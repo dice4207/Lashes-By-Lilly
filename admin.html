@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard | Lilly Lux Lashes</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff7fb;
+      color: #3a2a2f;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ffd6e8, #fff);
+      padding: 25px 8%;
+      border-bottom: 1px solid #f3bfd5;
+    }
+
+    h1 {
+      color: #9f3f69;
+    }
+
+    .container {
+      padding: 40px 8%;
+    }
+
+    .booking-card {
+      background: white;
+      border: 1px solid #f5c6d8;
+      border-radius: 22px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(120, 45, 78, 0.1);
+    }
+
+    .booking-card h2 {
+      color: #b84d78;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      background: #c94f7c;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #a93f66;
+    }
+
+    .status {
+      font-weight: bold;
+      color: #9f3f69;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Lilly Lux Lashes Admin Dashboard</h1>
+    <p>View appointments and charge no-show fees.</p>
+  </header>
+
+  <div class="container">
+    <div id="appointments"></div>
+  </div>
+
+  <script>
+    const API_URL = ["file:", "http:"].includes(window.location.protocol) &&
+      !["3000", "10000"].includes(window.location.port)
+      ? "http://localhost:3000"
+      : "";
+    let adminToken = sessionStorage.getItem("lillyLuxAdminToken");
+    const appointmentsDiv = document.getElementById("appointments");
+
+    function getAdminToken() {
+      if (!adminToken) {
+        adminToken = prompt("Enter admin access token:");
+        if (adminToken) {
+          sessionStorage.setItem("lillyLuxAdminToken", adminToken);
+        }
+      }
+
+      return adminToken;
+    }
+
+    function adminHeaders() {
+      return {
+        Authorization: `Bearer ${getAdminToken()}`
+      };
+    }
+
+    async function loadAppointments() {
+      appointmentsDiv.replaceChildren(messageParagraph("Loading appointments..."));
+
+      try {
+        const response = await fetch(`${API_URL}/api/appointments`, {
+          headers: adminHeaders()
+        });
+        const appointments = await response.json();
+
+        if (!response.ok) {
+          throw new Error(appointments.error || "Unable to load appointments.");
+        }
+
+        if (!appointments.length) {
+          appointmentsDiv.replaceChildren(messageParagraph("No appointments yet."));
+          return;
+        }
+
+        appointmentsDiv.replaceChildren();
+
+        appointments.forEach(app => {
+          const card = document.createElement("div");
+          card.className = "booking-card";
+
+          const heading = document.createElement("h2");
+          heading.textContent = app.name || "Unnamed client";
+          card.appendChild(heading);
+
+          [
+            ["Email", app.email],
+            ["Phone", app.phone],
+            ["Service", app.service],
+            ["Date", app.date],
+            ["Time", app.time],
+            ["No-Show Fee", `$${app.noShowFee}`],
+          ].forEach(([label, value]) => {
+            const item = document.createElement("p");
+            const strong = document.createElement("strong");
+            strong.textContent = `${label}: `;
+            item.appendChild(strong);
+            item.append(String(value || ""));
+            card.appendChild(item);
+          });
+
+          const status = document.createElement("p");
+          status.className = "status";
+          status.textContent = `Status: ${app.status || "unknown"}`;
+          card.appendChild(status);
+
+          const chargeButton = document.createElement("button");
+          chargeButton.type = "button";
+          chargeButton.textContent = "Charge No-Show Fee";
+          chargeButton.disabled = app.status !== "booked";
+          chargeButton.addEventListener("click", () => chargeNoShow(app.id, app.noShowFee));
+          card.appendChild(chargeButton);
+
+          appointmentsDiv.appendChild(card);
+        });
+
+      } catch (error) {
+        appointmentsDiv.replaceChildren(messageParagraph(error.message));
+      }
+    }
+
+    function messageParagraph(text) {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+      return paragraph;
+    }
+
+    async function chargeNoShow(appointmentId, amount) {
+      const confirmCharge = confirm(`Charge this client $${amount} for a no-show?`);
+
+      if (!confirmCharge) return;
+
+      try {
+        const response = await fetch(`${API_URL}/api/charge-no-show`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...adminHeaders()
+          },
+          body: JSON.stringify({
+            appointmentId
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Charge failed.");
+        }
+
+        alert("No-show fee charged successfully.");
+        loadAppointments();
+
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    loadAppointments();
+  </script>
+
+</body>
+</html>

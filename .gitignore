@@ -1,0 +1,5 @@
+beauty-booking-backend/.env
+beauty-booking-backend/node_modules/
+beauty-booking-backend/appointments.json
+.DS_Store
+Thumbs.db

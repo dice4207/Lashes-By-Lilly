@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#5e2840" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Lilly Lux Lashes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/assets/app-icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/app-icon-180.png" />
+  <title>Lilly Lux Lashes | Professional Lash Booking</title>
+
+  <style>
+    :root {
+      --ink: #221c1f;
+      --plum: #5e2840;
+      --rose: #a94467;
+      --blush: #f8dce7;
+      --petal: #fff7fa;
+      --cream: #fffdf8;
+      --sage: #607166;
+      --gold: #b6925a;
+      --line: rgba(94, 40, 64, 0.16);
+      --shadow: 0 24px 60px rgba(34, 28, 31, 0.14);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 18px 7%;
+      color: white;
+      background: linear-gradient(180deg, rgba(34, 28, 31, 0.74), rgba(34, 28, 31, 0));
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+
+    .logo span {
+      margin-top: 6px;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+    }
+
+    nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      color: white;
+    }
+
+    nav a:hover,
+    nav a:last-child {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      padding: 150px 7% 38px;
+      color: white;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(34, 28, 31, 0.86), rgba(34, 28, 31, 0.34) 52%, rgba(34, 28, 31, 0.12)),
+        linear-gradient(0deg, rgba(34, 28, 31, 0.88), rgba(34, 28, 31, 0.04) 42%),
+        url("assets/lash-artist.jpg") center 28% / cover no-repeat;
+    }
+
+    .hero-content {
+      width: min(1120px, 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      max-width: 820px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 82px;
+      line-height: 0.96;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      max-width: 610px;
+      margin-top: 24px;
+      font-size: 19px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 14px 24px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--rose);
+      color: white;
+      font-size: 15px;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 16px 32px rgba(34, 28, 31, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #8f3958;
+      box-shadow: 0 20px 38px rgba(34, 28, 31, 0.24);
+    }
+
+    .btn.secondary {
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      width: min(850px, 100%);
+      margin-top: 54px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(18px);
+    }
+
+    .proof-item {
+      padding: 18px;
+      background: rgba(34, 28, 31, 0.26);
+    }
+
+    .proof-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .proof-item span {
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    section {
+      padding: 92px 7%;
+    }
+
+    .section-kicker {
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--sage);
+    }
+
+    .section-title {
+      max-width: 780px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 48px;
+      line-height: 1.04;
+      font-weight: 500;
+      color: var(--plum);
+    }
+
+    .studio-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 54px;
+      align-items: center;
+      background: var(--cream);
+    }
+
+    .artist-panel {
+      position: relative;
+      min-height: 620px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: var(--blush);
+    }
+
+    .artist-panel img {
+      width: 100%;
+      height: 100%;
+      min-height: 620px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .artist-badge {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.36);
+      border-radius: 8px;
+      background: rgba(34, 28, 31, 0.72);
+      color: white;
+      backdrop-filter: blur(18px);
+    }
+
+    .artist-badge span {
+      display: block;
+      margin-bottom: 5px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .artist-badge strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .intro-copy {
+      max-width: 720px;
+    }
+
+    .intro-copy p {
+      margin-top: 22px;
+      color: #4e4145;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .signature-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .signature-list div {
+      min-height: 128px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .signature-list strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--plum);
+      font-size: 17px;
+    }
+
+    .signature-list span {
+      color: #67575d;
+      line-height: 1.55;
+    }
+
+    .services-section {
+      background:
+        linear-gradient(180deg, #fff7fa, #fffdf8);
+    }
+
+    .lash-match {
+      background: #fffdf8;
+    }
+
+    .match-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 540px);
+      gap: 42px;
+      align-items: start;
+      margin-top: 36px;
+    }
+
+    .match-copy p {
+      margin-top: 18px;
+      max-width: 600px;
+      color: #55474c;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .match-panel {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 22px 50px rgba(94, 40, 64, 0.08);
+    }
+
+    .match-question {
+      margin-bottom: 20px;
+    }
+
+    .match-question strong {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--plum);
+      font-size: 16px;
+    }
+
+    .match-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .match-option {
+      position: relative;
+    }
+
+    .match-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .match-option span {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      border: 1px solid rgba(94, 40, 64, 0.2);
+      border-radius: 8px;
+      color: var(--plum);
+      font-size: 14px;
+      font-weight: 900;
+      text-align: center;
+      cursor: pointer;
+      background: #fff;
+    }
+
+    .match-option input:checked + span {
+      border-color: var(--rose);
+      background: #fff7fa;
+      box-shadow: 0 0 0 4px rgba(169, 68, 103, 0.1);
+    }
+
+    .match-result {
+      min-height: 120px;
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 8px;
+      background: var(--petal);
+      color: #5d4e53;
+      line-height: 1.6;
+    }
+
+    .match-result strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--plum);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 26px;
+      font-weight: 500;
+    }
+
+    .match-result .btn {
+      width: 100%;
+      margin-top: 16px;
+      box-shadow: none;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 28px;
+      margin-bottom: 34px;
+    }
+
+    .section-head p {
+      max-width: 440px;
+      color: #5d4e53;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 22px 50px rgba(94, 40, 64, 0.08);
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 285px;
+      padding: 28px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: white;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .service-card:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .service-card:nth-child(n + 4) {
+      border-bottom: 0;
+    }
+
+    .service-card:hover {
+      z-index: 1;
+      transform: translateY(-4px);
+      background: #fff9fb;
+    }
+
+    .service-card.featured {
+      background:
+        linear-gradient(135deg, rgba(94, 40, 64, 0.08), rgba(182, 146, 90, 0.12)),
+        white;
+      box-shadow: inset 0 0 0 2px rgba(169, 68, 103, 0.2);
+    }
+
+    .service-card small {
+      display: inline-flex;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .service-tag {
+      display: inline-flex;
+      width: fit-content;
+      margin: 0 0 18px;
+      padding: 7px 10px;
+      border: 1px solid rgba(169, 68, 103, 0.2);
+      border-radius: 999px;
+      color: var(--rose);
+      background: #fff7fa;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .service-card h3 {
+      margin-bottom: 12px;
+      color: var(--plum);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 29px;
+      font-weight: 500;
+    }
+
+    .service-card p {
+      max-width: 280px;
+      margin-bottom: 58px;
+      color: #5d4e53;
+      line-height: 1.6;
+    }
+
+    .price {
+      position: absolute;
+      left: 28px;
+      bottom: 26px;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .looks-section {
+      background:
+        linear-gradient(180deg, #fffdf8, #fff7fa 48%, #fffdf8);
+    }
+
+    .gallery-intro {
+      max-width: 760px;
+      margin-top: 18px;
+      color: #5d4e53;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 38px;
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 24px 58px rgba(94, 40, 64, 0.1);
+    }
+
+    .gallery-card.featured-gallery {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+      grid-column: 1 / -1;
+      align-items: stretch;
+      background: #221c1f;
+      color: white;
+    }
+
+    .gallery-media {
+      position: relative;
+      min-height: 420px;
+      background: var(--blush);
+    }
+
+    .gallery-card:not(.featured-gallery) .gallery-media {
+      min-height: 390px;
+    }
+
+    .gallery-media img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+    }
+
+    .gallery-media picture {
+      display: block;
+      height: 100%;
+      min-height: inherit;
+    }
+
+    .gallery-media.volume img {
+      object-position: 52% 39%;
+    }
+
+    .gallery-media.hybrid img {
+      object-position: 42% 46%;
+    }
+
+    .gallery-media.mega img {
+      object-position: 50% 44%;
+    }
+
+    .gallery-media.textured img {
+      object-position: 50% 52%;
+    }
+
+    .gallery-media.wispy img {
+      object-position: 48% 48%;
+    }
+
+    .gallery-media.color img {
+      object-position: 50% 48%;
+    }
+
+    .gallery-content {
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 30px;
+    }
+
+    .featured-gallery .gallery-content {
+      padding: 44px;
+    }
+
+    .lash-category {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border: 1px solid rgba(169, 68, 103, 0.2);
+      border-radius: 999px;
+      color: var(--rose);
+      background: #fff7fa;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .featured-gallery .lash-category {
+      border-color: rgba(255, 255, 255, 0.26);
+      color: #ffe4ee;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .gallery-card h3 {
+      color: var(--plum);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      font-weight: 500;
+      line-height: 1.05;
+    }
+
+    .featured-gallery h3 {
+      color: white;
+      font-size: 46px;
+    }
+
+    .gallery-card p {
+      margin-top: 16px;
+      color: #5d4e53;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .featured-gallery p {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 18px;
+    }
+
+    .gallery-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 8px;
+    }
+
+    .gallery-details span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 8px 10px;
+      border: 1px solid rgba(94, 40, 64, 0.14);
+      border-radius: 999px;
+      color: #5e2840;
+      background: #fff9fb;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .featured-gallery .gallery-details span {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .experience-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      gap: 42px;
+      align-items: stretch;
+      background: var(--ink);
+      color: white;
+    }
+
+    .experience-band .section-title {
+      color: white;
+    }
+
+    .experience-band p {
+      margin-top: 20px;
+      max-width: 720px;
+      color: rgba(255, 255, 255, 0.74);
+      line-height: 1.8;
+      font-size: 18px;
+    }
+
+    .policy {
+      display: grid;
+      gap: 18px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .policy p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .faq-section {
+      background: #fffdf8;
+    }
+
+    .faq-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .faq-item {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 18px 40px rgba(94, 40, 64, 0.06);
+    }
+
+    .faq-item h3 {
+      margin-bottom: 10px;
+      color: var(--plum);
+      font-size: 18px;
+    }
+
+    .faq-item p {
+      color: #5d4e53;
+      line-height: 1.65;
+    }
+
+    .booking {
+      background:
+        linear-gradient(120deg, rgba(248, 220, 231, 0.78), rgba(255, 253, 248, 0.94)),
+        var(--petal);
+    }
+
+    .booking-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 540px);
+      gap: 46px;
+      align-items: start;
+      margin-top: 38px;
+    }
+
+    .booking-copy {
+      padding-top: 18px;
+    }
+
+    .booking-copy p {
+      margin-top: 18px;
+      max-width: 560px;
+      color: #55474c;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .booking-steps {
+      display: grid;
+      gap: 14px;
+      margin-top: 30px;
+      max-width: 560px;
+    }
+
+    .booking-steps div {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .booking-steps span {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      flex: 0 0 auto;
+      background: var(--plum);
+      color: white;
+      font-weight: 900;
+    }
+
+    .booking-steps strong {
+      color: var(--plum);
+    }
+
+    .booking-form {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .booking-form input,
+    .booking-form select,
+    .card-input {
+      width: 100%;
+      min-height: 52px;
+      margin-bottom: 14px;
+      padding: 14px 15px;
+      border: 1px solid rgba(94, 40, 64, 0.2);
+      border-radius: 8px;
+      color: var(--ink);
+      font-size: 16px;
+      background: #fff;
+      outline: none;
+    }
+
+    .booking-form input:focus,
+    .booking-form select:focus,
+    .card-input.StripeElement--focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 4px rgba(169, 68, 103, 0.12);
+    }
+
+    .booking-form label {
+      display: block;
+      margin: 8px 0;
+      color: var(--plum);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .booking-form .btn {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .booking-form .btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
+    .booking-policy {
+      margin: 16px 0;
+      color: #5d4e53;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .booking-message {
+      min-height: 24px;
+      margin-top: 20px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .booking-message.success {
+      color: #267348;
+    }
+
+    .booking-message.error {
+      color: #b33152;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 28px 7%;
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      header {
+        position: absolute;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+        overflow-x: auto;
+      }
+
+      .hero {
+        min-height: 900px;
+        padding-top: 190px;
+        background:
+          linear-gradient(90deg, rgba(34, 28, 31, 0.82), rgba(34, 28, 31, 0.42)),
+          linear-gradient(0deg, rgba(34, 28, 31, 0.9), rgba(34, 28, 31, 0.02) 46%),
+          url("assets/lash-artist.jpg") center top / cover no-repeat;
+      }
+
+      .hero h1 {
+        font-size: 58px;
+      }
+
+      .hero-proof,
+      .studio-intro,
+      .experience-band,
+      .match-layout,
+      .gallery-grid,
+      .gallery-card.featured-gallery,
+      .booking-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .services {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .service-card,
+      .service-card:nth-child(3n),
+      .service-card:nth-child(n + 4) {
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .service-card:nth-child(even) {
+        border-right: 0;
+      }
+
+      .service-card:nth-child(n + 5) {
+        border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      nav {
+        gap: 4px;
+        padding: 5px;
+      }
+
+      nav a {
+        padding: 9px 11px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      .hero,
+      section {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .hero {
+        min-height: 860px;
+        padding-bottom: 28px;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .hero-copy,
+      .intro-copy p,
+      .experience-band p,
+      .booking-copy p {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-proof,
+      .signature-list,
+      .faq-list,
+      .match-options,
+      .gallery-grid,
+      .services {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .section-head p {
+        margin-top: 16px;
+      }
+
+      .section-title {
+        font-size: 36px;
+      }
+
+      .artist-panel,
+      .artist-panel img {
+        min-height: 520px;
+      }
+
+      .service-card {
+        min-height: 260px;
+      }
+
+      .gallery-media,
+      .gallery-card:not(.featured-gallery) .gallery-media,
+      .gallery-media img {
+        min-height: 295px;
+      }
+
+      .featured-gallery .gallery-content,
+      .gallery-content {
+        padding: 24px;
+      }
+
+      .booking-form {
+        padding: 22px;
+      }
+
+      .artist-badge {
+        display: block;
+      }
+
+      .artist-badge div + div {
+        margin-top: 12px;
+      }
+
+      .service-card,
+      .service-card:nth-child(3n),
+      .service-card:nth-child(even),
+      .service-card:nth-child(n + 4),
+      .service-card:nth-child(n + 5) {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .service-card:last-child {
+        border-bottom: 0;
+      }
+
+      footer {
+        display: block;
+        text-align: center;
+      }
+
+      footer p + p {
+        margin-top: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      Lilly Lux Lashes
+      <span>Private lash studio</span>
+    </div>
+    <nav aria-label="Primary navigation">
+      <a href="#about">Artist</a>
+      <a href="#services">Services</a>
+      <a href="#policy">Policy</a>
+      <a href="#book">Book</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Lilly Lux Lashes">
+      <div class="hero-content">
+        <div class="eyebrow">Professional lash artistry</div>
+        <h1>Lashes designed like a signature.</h1>
+        <p class="hero-copy">
+          A polished beauty experience for custom lash sets, fills, brows, and soft glam
+          maintenance, shaped around your natural features and personal style.
+        </p>
+        <div class="hero-actions">
+          <a href="#book" class="btn">Reserve Your Appointment</a>
+          <a href="#services" class="btn secondary">View Services</a>
+        </div>
+
+        <div class="hero-proof" aria-label="Studio highlights">
+          <div class="proof-item">
+            <strong>6+</strong>
+            <span>Years of lash artistry</span>
+          </div>
+          <div class="proof-item">
+            <strong>Custom</strong>
+            <span>Mapping for every eye shape</span>
+          </div>
+          <div class="proof-item">
+            <strong>Secure</strong>
+            <span>Card hold for serious bookings</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="studio-intro">
+      <div class="artist-panel">
+        <img src="assets/lash-artist.jpg" alt="Professional lash artist at Lilly Lux Lashes" />
+        <div class="artist-badge">
+          <div>
+            <span>Your artist</span>
+            <strong>Lillyanna "Lilly"</strong>
+          </div>
+          <div>
+            <span>Focus</span>
+            <strong>Clean, precise, comfortable</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-copy">
+        <div class="section-kicker">Meet the artist</div>
+        <h2 class="section-title">A calm studio experience with detail in every lash.</h2>
+        <p>
+          Hi, I'm Lillyanna; my friends call me Lilly. I'm a lash artist with
+          6 years of experience helping clients feel beautiful, confident, and put together.
+          I care about clean work, comfort, and sets that look intentional from every angle.
+        </p>
+        <p>
+          Whether you want soft classic lashes or a fuller glam style, your appointment is
+          built around your face, your routine, and the look you want to wake up with.
+        </p>
+
+        <div class="signature-list">
+          <div>
+            <strong>Personal Lash Mapping</strong>
+            <span>Each set is styled to complement your eye shape instead of copying a trend.</span>
+          </div>
+          <div>
+            <strong>Comfort First</strong>
+            <span>Gentle application, clean tools, and a relaxed appointment from start to finish.</span>
+          </div>
+          <div>
+            <strong>Retention Care</strong>
+            <span>Thoughtful prep and aftercare guidance to keep your lashes looking fresh.</span>
+          </div>
+          <div>
+            <strong>Polished Results</strong>
+            <span>Balanced lashes that photograph beautifully and still feel wearable.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lash-match" class="lash-match">
+      <div class="section-kicker">Lilly's Lash Match</div>
+      <h2 class="section-title">Find the set that fits your face, routine, and mood.</h2>
+
+      <div class="match-layout">
+        <div class="match-copy">
+          <p>
+            Not sure what to book first? Answer a few quick questions and I will point you
+            toward the service that makes the most sense for your natural lashes and everyday style.
+          </p>
+          <p>
+            This is not a final consultation, just a helpful starting point before your appointment.
+          </p>
+        </div>
+
+        <div class="match-panel" aria-label="Lash service recommendation quiz">
+          <div class="match-question">
+            <strong>What kind of look do you want?</strong>
+            <div class="match-options">
+              <label class="match-option">
+                <input type="radio" name="look" value="classic" checked />
+                <span>Soft and natural</span>
+              </label>
+              <label class="match-option">
+                <input type="radio" name="look" value="hybrid" />
+                <span>Noticeable but wearable</span>
+              </label>
+              <label class="match-option">
+                <input type="radio" name="look" value="volume" />
+                <span>Full and glam</span>
+              </label>
+              <label class="match-option">
+                <input type="radio" name="look" value="fill" />
+                <span>I already have lashes</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="match-question">
+            <strong>How much maintenance feels realistic?</strong>
+            <div class="match-options">
+              <label class="match-option">
+                <input type="radio" name="routine" value="low" checked />
+                <span>Keep it simple</span>
+              </label>
+              <label class="match-option">
+                <input type="radio" name="routine" value="medium" />
+                <span>I can keep up</span>
+              </label>
+              <label class="match-option">
+                <input type="radio" name="routine" value="high" />
+                <span>I love glam upkeep</span>
+              </label>
+              <label class="match-option">
+                <input type="radio" name="routine" value="refresh" />
+                <span>I need a refresh</span>
+              </label>
+            </div>
+          </div>
+
+          <div id="matchResult" class="match-result" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services-section">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Service menu</div>
+          <h2 class="section-title">Choose the finish that fits your lifestyle.</h2>
+        </div>
+        <p>
+          Every service is designed to feel elevated but practical, so your beauty routine
+          looks effortless after you leave the studio.
+        </p>
+      </div>
+
+      <div class="services">
+        <div class="service-card">
+          <small>01</small>
+          <span class="service-tag">Natural</span>
+          <h3>Classic Lash Set</h3>
+          <p>Natural, polished definition for everyday softness.</p>
+          <div class="price">$95+</div>
+        </div>
+
+        <div class="service-card">
+          <small>02</small>
+          <span class="service-tag">Soft glam</span>
+          <h3>Hybrid Lash Set</h3>
+          <p>A balanced mix of classic and volume for fuller texture.</p>
+          <div class="price">$125+</div>
+        </div>
+
+        <div class="service-card">
+          <small>03</small>
+          <span class="service-tag">Full glam</span>
+          <h3>Volume Lash Set</h3>
+          <p>Fluffy, bold lashes with a glamorous custom shape.</p>
+          <div class="price">$150+</div>
+        </div>
+
+        <div class="service-card featured">
+          <small>04</small>
+          <span class="service-tag">Maximum density</span>
+          <h3>Mega Volume</h3>
+          <p>Similar to volume, but uses higher volumes of thinner lashes for maximum density.</p>
+          <div class="price">$175+</div>
+        </div>
+
+        <div class="service-card">
+          <small>05</small>
+          <span class="service-tag">Refresh</span>
+          <h3>Lash Fill</h3>
+          <p>Refresh your set and keep your lashes full between appointments.</p>
+          <div class="price">$65+</div>
+        </div>
+
+        <div class="service-card">
+          <small>06</small>
+          <span class="service-tag">Face framing</span>
+          <h3>Brow Tint</h3>
+          <p>Soft definition that frames your face and finishes the look.</p>
+          <div class="price">$35+</div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="looks-section" aria-label="Lash gallery and style inspiration">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Signature lash gallery</div>
+          <h2 class="section-title">Every lash set has its own kind of beauty.</h2>
+        </div>
+        <p>
+          Explore the softness, texture, fullness, and drama of each style so every client
+          can choose the set that feels like their prettiest reflection.
+        </p>
+      </div>
+
+      <p class="gallery-intro">
+        Each look is categorized by lash type and shaped around the eye, the natural lash line,
+        and the feeling the client wants to carry when they walk out the door.
+      </p>
+
+      <div class="gallery-grid">
+        <article class="gallery-card featured-gallery">
+          <div class="gallery-media volume">
+            <img src="assets/gallery-volume-full.jpg" alt="Full volume lash extension set with soft lifted curl" />
+          </div>
+          <div class="gallery-content">
+            <div>
+              <span class="lash-category">Volume Lash Set</span>
+              <h3>Full, graceful, and unforgettable.</h3>
+              <p>
+                This volume set wraps the eyes in a soft cloud of darkness, giving every blink
+                a romantic, polished finish. It is bold enough to feel glamorous, yet feathered
+                enough to keep the face sweet, open, and beautifully feminine.
+              </p>
+            </div>
+            <div class="gallery-details">
+              <span>Best for glam lovers</span>
+              <span>Full density</span>
+              <span>Soft lifted curl</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-media hybrid">
+            <img src="assets/gallery-hybrid-glam.jpg" alt="Hybrid glam lash extension set with textured fullness" />
+          </div>
+          <div class="gallery-content">
+            <div>
+              <span class="lash-category">Hybrid Glam Set</span>
+              <h3>Soft texture with a little sparkle in its soul.</h3>
+              <p>
+                Hybrid lashes bring the perfect in-between: airy fans for fullness and classic
+                placement for clean definition. The result feels flirty, fresh, and effortless,
+                like waking up already glowing.
+              </p>
+            </div>
+            <div class="gallery-details">
+              <span>Best for everyday glam</span>
+              <span>Textured finish</span>
+              <span>Balanced fullness</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-media mega">
+            <img src="assets/gallery-mega-volume.jpg" alt="Mega volume lash extension close-up with dramatic density" />
+          </div>
+          <div class="gallery-content">
+            <div>
+              <span class="lash-category">Mega Volume Set</span>
+              <h3>Deep drama, delicate artistry.</h3>
+              <p>
+                Mega volume is the showstopper: dark, dense, and breathtaking from every angle.
+                The lash line looks rich and luxurious while the fine fans keep the finish
+                soft, plush, and beautifully sculpted.
+              </p>
+            </div>
+            <div class="gallery-details">
+              <span>Best for bold beauty</span>
+              <span>Maximum density</span>
+              <span>Luxury finish</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-media textured">
+            <img src="assets/gallery-textured-wispy.jpg" alt="Textured wispy lash extension set with soft dimension" />
+          </div>
+          <div class="gallery-content">
+            <div>
+              <span class="lash-category">Textured Wispy Set</span>
+              <h3>Soft drama with the prettiest little flutter.</h3>
+              <p>
+                This textured wispy set gives the eye a lifted, romantic finish with delicate
+                peaks and soft fullness. It feels graceful up close, dreamy in photos, and
+                sweet enough to make everyday beauty feel special.
+              </p>
+            </div>
+            <div class="gallery-details">
+              <span>Best for soft glam</span>
+              <span>Wispy texture</span>
+              <span>Lifted finish</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-media wispy">
+            <img src="assets/gallery-wispy-natural.jpg" alt="Wispy natural lash extension set with airy spikes" />
+          </div>
+          <div class="gallery-content">
+            <div>
+              <span class="lash-category">Wispy Natural Set</span>
+              <h3>Light, airy, and impossible not to love.</h3>
+              <p>
+                This wispy set gives the eye a soft flutter with delicate peaks that feel
+                playful without becoming heavy. It is the kind of beauty that catches the
+                light quietly and makes someone look twice for all the sweetest reasons.
+              </p>
+            </div>
+            <div class="gallery-details">
+              <span>Best for soft dimension</span>
+              <span>Airy texture</span>
+              <span>Natural flutter</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery-card">
+          <div class="gallery-media color">
+            <img src="assets/gallery-color-accent.jpg" alt="Green color accent lash extension set with bold outer corners" />
+          </div>
+          <div class="gallery-content">
+            <div>
+              <span class="lash-category">Color Accent Set</span>
+              <h3>A little color, a whole lot of confidence.</h3>
+              <p>
+                The green accent lashes add a bright, custom pop while the dark base keeps the
+                look sleek and wearable. It is creative, fearless, and joyful, made for the
+                client who wants her lashes to feel like a signature.
+              </p>
+            </div>
+            <div class="gallery-details">
+              <span>Best for statement style</span>
+              <span>Custom color</span>
+              <span>Playful outer pop</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="policy" class="experience-band">
+      <div>
+        <div class="section-kicker">Booking standard</div>
+        <h2 class="section-title">A professional policy for a professional appointment.</h2>
+        <p>
+          Your appointment time is reserved just for you. The card requirement protects
+          the artist's schedule, keeps openings available for serious clients, and makes
+          the booking process feel smooth from start to finish.
+        </p>
+      </div>
+
+      <div class="policy">
+        <p>
+          A valid card is required to reserve all appointments. Please cancel or reschedule
+          at least 24 hours before your appointment time.
+        </p>
+        <p>
+          Late cancellations or no-shows may be charged up to the full appointment amount.
+        </p>
+        <p>
+          By booking, you agree to this cancellation and no-show policy.
+        </p>
+        <p>
+          Lillyanna reserves the right to refuse service to anyone who does not follow
+          studio policies, behaves disrespectfully, or creates an unsafe appointment
+          environment.
+        </p>
+      </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+      <div class="section-kicker">Frequently asked questions</div>
+      <h2 class="section-title">A few details before your appointment.</h2>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>How long does a full lash set take?</h3>
+          <p>
+            Most full sets take about 2 to 3 hours, depending on the style, natural lashes,
+            and the look we are creating.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How often should I book a fill?</h3>
+          <p>
+            Fills are usually recommended every 2 to 3 weeks to keep your lashes full,
+            balanced, and fresh.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How should I arrive for my appointment?</h3>
+          <p>
+            Please arrive with clean lashes and no eye makeup. This helps with retention
+            and gives us the best foundation for your set.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I get my lashes wet after?</h3>
+          <p>
+            Yes, but follow the aftercare guidance given at your appointment. Keeping your
+            lashes clean is one of the best ways to protect retention.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>What if I am not sure what style to book?</h3>
+          <p>
+            Book the closest service and we can talk through your desired look before
+            starting. I will help choose a style that fits your eyes and routine.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Why is a card required to book?</h3>
+          <p>
+            A valid card reserves your appointment time and supports the cancellation and
+            no-show policy. Your card is saved securely through Stripe.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can service be refused?</h3>
+          <p>
+            Yes. Lillyanna reserves the right to refuse service if studio policies are not
+            followed, boundaries are not respected, or the appointment environment becomes
+            unsafe.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="book" class="booking">
+      <div class="section-kicker">Reserve your seat</div>
+      <h2 class="section-title">Book the set your week deserves.</h2>
+
+      <div class="booking-layout">
+        <div class="booking-copy">
+          <p>
+            Select your service, choose your preferred appointment time, and securely add
+            your card for the cancellation policy. Your card is saved for policy purposes
+            and your appointment is confirmed through the booking system.
+          </p>
+
+          <div class="booking-steps">
+            <div>
+              <span>1</span>
+              <strong>Pick your lash or beauty service.</strong>
+            </div>
+            <div>
+              <span>2</span>
+              <strong>Choose the date and time that works for you.</strong>
+            </div>
+            <div>
+              <span>3</span>
+              <strong>Secure the appointment with your card.</strong>
+            </div>
+          </div>
+        </div>
+
+        <form id="bookingForm" class="booking-form">
+          <input id="name" placeholder="Full Name" autocomplete="name" required />
+          <input id="email" type="email" placeholder="Email" autocomplete="email" required />
+          <input id="phone" type="tel" inputmode="tel" placeholder="Phone Number" autocomplete="tel" required />
+
+          <select id="service" required>
+            <option value="">Choose a Service</option>
+            <option value="Classic Lash Set" data-fee="95">Classic Lash Set - $95</option>
+            <option value="Hybrid Lash Set" data-fee="125">Hybrid Lash Set - $125</option>
+            <option value="Volume Lash Set" data-fee="150">Volume Lash Set - $150</option>
+            <option value="Mega Volume" data-fee="175">Mega Volume - $175</option>
+            <option value="Lash Fill" data-fee="65">Lash Fill - $65</option>
+            <option value="Brow Tint" data-fee="35">Brow Tint - $35</option>
+          </select>
+
+          <input id="date" type="date" required />
+          <input id="time" type="time" required />
+
+          <label for="card-element">Card Information</label>
+          <div id="card-element" class="card-input"></div>
+
+          <p class="booking-policy">
+            By booking, you agree that your card may be charged for a late cancellation or no-show.
+            Service may be refused if studio policies are not followed or respectful conduct is not maintained.
+          </p>
+
+          <button id="bookingButton" class="btn" type="submit">Continue to Card</button>
+        </form>
+      </div>
+
+      <p id="message" class="booking-message" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Lilly Lux Lashes. All Rights Reserved.</p>
+    <p>Private lash studio experience</p>
+  </footer>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+
+    window.addEventListener("load", () => {
+      window.scrollTo(0, 0);
+    });
+
+    const API_URL = ["file:", "http:"].includes(window.location.protocol) &&
+      !["3000", "10000"].includes(window.location.port)
+      ? "http://localhost:3000"
+      : "";
+
+    const form = document.getElementById("bookingForm");
+    const message = document.getElementById("message");
+    const bookingButton = document.getElementById("bookingButton");
+    const serviceSelect = document.getElementById("service");
+    const matchResult = document.getElementById("matchResult");
+    let stripe;
+    let cardElement;
+
+    const matchRecommendations = {
+      classic: {
+        service: "Classic Lash Set",
+        title: "Classic Lash Set",
+        copy: "Your match is soft, clean definition that still feels like you. This is perfect if you want an elevated everyday look without going too bold."
+      },
+      hybrid: {
+        service: "Hybrid Lash Set",
+        title: "Hybrid Lash Set",
+        copy: "Your match is the best of both worlds: texture, fullness, and a polished finish that still feels wearable day to day."
+      },
+      volume: {
+        service: "Volume Lash Set",
+        title: "Volume Lash Set",
+        copy: "Your match is full, fluffy glam with a custom shape. This is for the days when you want your lashes to do the talking."
+      },
+      fill: {
+        service: "Lash Fill",
+        title: "Lash Fill",
+        copy: "Your match is a refresh to bring your current set back to life and keep everything looking balanced."
+      }
+    };
+
+    function selectedMatchValue(name) {
+      const selected = document.querySelector(`input[name="${name}"]:checked`);
+      return selected ? selected.value : "";
+    }
+
+    function updateLashMatch() {
+      if (!matchResult) return;
+
+      const look = selectedMatchValue("look");
+      const routine = selectedMatchValue("routine");
+      let key = look;
+
+      if (routine === "refresh") key = "fill";
+      if (routine === "high" && look !== "fill") key = "volume";
+      if (routine === "low" && look === "volume") key = "hybrid";
+
+      const recommendation = matchRecommendations[key] || matchRecommendations.classic;
+      matchResult.replaceChildren();
+
+      const title = document.createElement("strong");
+      title.textContent = recommendation.title;
+
+      const copy = document.createElement("p");
+      copy.textContent = recommendation.copy;
+
+      const action = document.createElement("a");
+      action.href = "#book";
+      action.className = "btn";
+      action.textContent = "Book This Match";
+      action.addEventListener("click", () => {
+        serviceSelect.value = recommendation.service;
+      });
+
+      matchResult.append(title, copy, action);
+    }
+
+    document.querySelectorAll(".match-option input").forEach(input => {
+      input.addEventListener("change", updateLashMatch);
+    });
+
+    updateLashMatch();
+
+    async function initializePayments() {
+      try {
+        const response = await fetch(`${API_URL}/api/config`);
+        const contentType = response.headers.get("content-type") || "";
+        if (!contentType.includes("application/json")) {
+          throw new Error("The booking API is not running. Start the backend and open http://localhost:3000.");
+        }
+
+        const config = await response.json();
+
+        if (!response.ok) {
+          throw new Error(config.error || "Payment setup is not configured.");
+        }
+
+        stripe = Stripe(config.stripePublishableKey);
+
+        const elements = stripe.elements();
+        cardElement = elements.create("card", {
+          style: {
+            base: {
+              fontSize: "16px",
+              color: "#221c1f",
+              "::placeholder": {
+                color: "#9a7c87"
+              }
+            }
+          }
+        });
+
+        cardElement.mount("#card-element");
+      } catch (error) {
+        bookingButton.disabled = true;
+        message.className = "booking-message error";
+        message.textContent = error.message;
+      }
+    }
+
+    initializePayments();
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      if (!stripe || !cardElement) {
+        message.className = "booking-message error";
+        message.textContent = "Payment setup is still loading. Please try again in a moment.";
+        return;
+      }
+
+      message.className = "booking-message";
+      message.textContent = "Saving card and booking appointment...";
+      bookingButton.disabled = true;
+
+      const appointmentData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        service: document.getElementById("service").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        noShowFee: 50
+      };
+
+      try {
+        const setupResponse = await fetch(`${API_URL}/api/create-card-setup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(appointmentData),
+        });
+
+        const setupData = await setupResponse.json();
+        if (!setupResponse.ok) {
+          throw new Error(setupData.error || "Card setup failed.");
+        }
+
+        const result = await stripe.confirmCardSetup(setupData.clientSecret, {
+          payment_method: {
+            card: cardElement,
+            billing_details: {
+              name: appointmentData.name,
+              email: appointmentData.email,
+              phone: appointmentData.phone
+            }
+          }
+        });
+
+        if (result.error) {
+          throw new Error(result.error.message);
+        }
+
+        const bookingResponse = await fetch(`${API_URL}/api/book-appointment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...appointmentData,
+            customerId: setupData.customerId,
+            paymentMethodId: result.setupIntent.payment_method,
+            setupIntentId: setupData.setupIntentId
+          }),
+        });
+
+        const bookingData = await bookingResponse.json();
+        if (!bookingResponse.ok) {
+          throw new Error(bookingData.error || "Booking failed.");
+        }
+
+        message.className = "booking-message success";
+        message.textContent = "Your appointment has been booked. Your card is securely saved for the cancellation/no-show policy.";
+        form.reset();
+        cardElement.clear();
+      } catch (error) {
+        message.className = "booking-message error";
+        message.textContent = error.message;
+      } finally {
+        bookingButton.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
