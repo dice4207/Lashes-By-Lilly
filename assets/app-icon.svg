@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Lilly Lux Lashes app icon</title>
+  <desc id="desc">A plum and rose monogram icon for Lilly Lux Lashes.</desc>
+  <rect width="512" height="512" rx="112" fill="#5e2840"/>
+  <circle cx="256" cy="256" r="188" fill="#fff7fa" opacity="0.96"/>
+  <path d="M145 305c58-72 164-72 222 0" fill="none" stroke="#5e2840" stroke-width="22" stroke-linecap="round"/>
+  <path d="M166 286l-34-34M210 266l-20-48M256 258v-56M302 266l20-48M346 286l34-34" fill="none" stroke="#a94467" stroke-width="18" stroke-linecap="round"/>
+  <text x="256" y="198" text-anchor="middle" fill="#5e2840" font-family="Georgia, 'Times New Roman', serif" font-size="92" font-weight="700">LL</text>
+  <path d="M178 344h156" fill="none" stroke="#b6925a" stroke-width="14" stroke-linecap="round"/>
+</svg>
